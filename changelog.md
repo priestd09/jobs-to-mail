@@ -1,6 +1,41 @@
 # Changelog
 All Notable changes to `jobs-to-mail` will be documented in this file.
 
+## 1.2.0 - 2017-12-29
+
+### Fixed
+- Reference to outdated bootstrap variable.
+- Instructions for Docker installation.
+- Extra volume in Docker compose file.
+- Styling updates for bootstrap 4 beta.
+
+### Added
+- NPM `package-lock.json` file.
+- Support for Monster RSS feed and Jobs2Careers.
+- Source to list of jobs for each day.
+- `max_searches` field to each user that allows more searches. 
+
+### Changed
+- Switched Jobs Hub advert out for new email to upgrade link.
+- Using config `mail.from.address` for admin email universally.
+- Upgraded to Laravel 5.5, PHP 7.1.
+- Upgraded several dependencies to new major versions.
+
+### Removed
+- Dice's API has been [shut down](https://www.jobapis.com/2017/10/28/dice-job-board-api-shut-down/).
+
+## 1.1.0 - 2017-04-18
+
+### Added
+- New "notification" page to view all jobs collected on a day for a specific search term.
+- Added recruiters to database seeder.
+- Indication when job posted by known recruiter.
+- Artisan command to delete notifications > 7 days old: `php artisan notifications:delete`.
+- Added Docker files, instructions to readme.
+
+### Changed
+- Only returning jobs from the past 48 hours to cut down on repeated results.
+
 ## 1.0.0 - 2016-12-31
 
 ### Added

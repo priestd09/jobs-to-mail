@@ -1,9 +1,9 @@
-<?php namespace JobApis\JobsToMail\Tests\Unit\Jobs\Collections;
+<?php namespace JobApis\JobsToMail\Tests\Unit\Jobs\Notifications;
 
 use Illuminate\Support\Facades\Log;
 use JobApis\JobsToMail\Tests\TestCase;
 use Mockery as m;
-use JobApis\JobsToMail\Jobs\Collections\SearchAndNotifyUser;
+use JobApis\JobsToMail\Jobs\Notifications\SearchAndNotifyUser;
 
 class SearchAndNotifyUserTest extends TestCase
 {
@@ -25,8 +25,8 @@ class SearchAndNotifyUserTest extends TestCase
         $jobs = m::mock('JobApis\Jobs\Client\Collection');
         $jobsArray = $this->getJobsArray();
         $options = [
-            'maxAge' => 14,
-            'maxResults' => 50,
+            'maxAge' => 2,
+            'maxResults' => 25,
             'orderBy' => 'datePosted',
             'order' => 'desc',
         ];
@@ -87,8 +87,8 @@ class SearchAndNotifyUserTest extends TestCase
         $jobs = m::mock('JobApis\Jobs\Client\Collection');
         $jobsArray = [];
         $options = [
-            'maxAge' => 14,
-            'maxResults' => 50,
+            'maxAge' => 2,
+            'maxResults' => 25,
             'orderBy' => 'datePosted',
             'order' => 'desc',
         ];

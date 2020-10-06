@@ -2,7 +2,6 @@
 
 use JobApis\JobsToMail\Filters\JobFilter;
 use JobApis\JobsToMail\Tests\TestCase;
-use Mockery as m;
 
 class JobFilterTest extends TestCase
 {
@@ -58,7 +57,7 @@ class JobFilterTest extends TestCase
         $results = $this->filter->sort($jobsArray, 10, 50);
 
         // Ensure that the results cut off at the max
-        $this->assertLessThan(20, count($results));
+        $this->assertLessThanOrEqual(20, count($results));
 
         // Ensure that each job has an earlier date than the one previous
         $previousDate = null;

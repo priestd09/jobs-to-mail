@@ -1,4 +1,5 @@
-# JobsToMail
+# [![JobApis.com](https://i.imgur.com/9VOAkrZ.png)](https://www.jobapis.com) JobsToMail
+#### Your personal job-search assistant
 
 [![Latest Version](https://img.shields.io/github/release/jobapis/jobs-to-mail.svg?style=flat-square)](https://github.com/jobapis/jobs-to-mail/releases)
 [![Software License](https://img.shields.io/badge/license-APACHE%202.0-brightgreen.svg?style=flat-square)](license.md)
@@ -7,9 +8,15 @@
 [![Quality Score](https://img.shields.io/scrutinizer/g/jobapis/jobs-to-mail.svg?style=flat-square)](https://scrutinizer-ci.com/g/jobapis/jobs-to-mail)
 [![Total Downloads](https://img.shields.io/packagist/dt/jobapis/jobs-to-mail.svg?style=flat-square)](https://packagist.org/packages/jobapis/jobs-to-mail)
 
-JobsToMail is an open source web application that allows users to sign up to receive emails with jobs from one of several job boards supported by the [JobApis](http://www.jobapis.com/) project. Users can sign up to receive jobs for free at [www.jobstomail.com](http://www.jobstomail.com) or use the setup instructions below to run the application on their own server.
+## About
 
-This application is built on [Laravel 5.3](http://laravel.com/) using the [Jobs Multi](https://github.com/jobapis/jobs-multi) and [Jobs Common](https://github.com/jobapis/jobs-common) packages. The frontend uses [Bootstrap v4](http://v4-alpha.getbootstrap.com/) and [Gulp](http://gulpjs.com/).
+JobsToMail is an open source web application that allows users to sign up to receive emails with jobs from one of several job boards supported by the [JobApis](https://www.jobapis.com/) project. Users can sign up to receive jobs for free at [jobs-to-mail.herokuapp.com](https://jobs-to-mail.herokuapp.com/) or use the setup instructions below to run the application on their own server.
+
+This application is built on [Laravel 5.5](http://laravel.com/) using the [Jobs Multi](https://github.com/jobapis/jobs-multi) and [Jobs Common](https://github.com/jobapis/jobs-common) packages. The frontend uses [Bootstrap v4](http://v4-alpha.getbootstrap.com/) and [Gulp](http://gulpjs.com/).
+
+### Mission
+
+[JobApis](https://www.jobapis.com) makes job board and company data more accessible through open source software. To learn more, visit [JobApis.com](https://www.jobapis.com), or contact us at [admin@jobapis.com](mailto:admin@jobapis.com).
 
 ## Setup
 
@@ -18,7 +25,7 @@ This application is only designed to work with PHP 7.0+ and Postgres 9.5+. Some 
 
 Installation requires the following:
 
-- [PHP 7.0+](http://php.net/releases/7_0_0.php)
+- [PHP 7.1+](http://php.net/releases/7_1_0.php)
 - [Postgresql 9.5](https://www.postgresql.org/)
 - [Composer](https://getcomposer.org/)
 - [Node 6.0+](https://nodejs.org/en/blog/release/v6.0.0/)
@@ -44,6 +51,23 @@ composer create-project jobapis/jobs-to-mail
 5. Visit the local application at `localhost:8000`.
 
 6. Once at least one user has signed up, you can run the job collection and email command: `php artisan jobs:email`.
+
+### Docker installation
+After you've got Docker installed and running:
+
+1. Install composer dependencies: `docker run --rm -v $(pwd):/app composer:latest install`
+
+2. Copy `.env.example` to `.env` and customize it with your environmental variables.
+
+3. Run `docker-compose build` and then `docker-compose up -d` to get the services running.
+
+4. Run `npm install && node node_modules/.bin/gulp` to build the frontend.
+
+5. Run migrations: `docker exec jobstomail_web_1 php artisan migrate`.
+
+6. Run the collect and email command: `docker exec jobstomail_web_1 php artisan jobs:email`.
+
+You can run tests with `docker exec jobstomail_web_1 vendor/bin/phpunit`.
 
 ### Heroku installation
 
@@ -110,7 +134,7 @@ php artisan jobs:email
 
 This command will loop through each user, collect jobs based on their search criteria, and then email them when their list has been compiled.
 
-Because this job search can take a long time, it is best to use a [queueing system](https://laravel.com/docs/5.3/queues) and run the job in the background (via cron job). Instructions for setting this up in Heroku are above, but if you have trouble, you can post a question to the Issues tab in the Github repository.
+Because this job search can take a long time, it is best to use a worker and run the job in the background (via cron job). Instructions for setting this up in Heroku are above, but if you have trouble, you can post a question to the Issues tab in the Github repository.
 
 You can also run this job for only one email address in your system when testing or debugging:
 
@@ -129,7 +153,7 @@ vendor/bin/phpunit
 Code coverage reports are automatically generated, and can be found in the `/build` directory after running the test suite.
 
 ## Seeding data
-If you're doing local development, you may find it handy to seed the database with some test data. Using [Laravel's seed commands you can do just that](https://laravel.com/docs/5.3/seeding):
+If you're doing local development, you may find it handy to seed the database with some test data. Using [Laravel's seed commands you can do just that](https://laravel.com/docs/5.5/seeding):
 
 - Truncate and seed the database tables
 ```
@@ -150,26 +174,18 @@ _Note: Truncation is permanent, so be careful running this in your production en
 
 ## Contributing
 
-Contributions are **welcome** and will be fully **credited**.
+Contributions are welcomed and encouraged! Please see [JobApis' contribution guidelines](https://www.jobapis.com/contributing/) for details, or create an issue in Github if you have any questions.
 
-We accept contributions via Pull Requests on [Github](https://github.com/jobapis/jobs-to-mail).
+## Legal
 
-## Pull Requests
+### Disclaimer
 
-- **[PSR-2 Coding Standard](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-2-coding-style-guide.md)** - The easiest way to apply the conventions is to install [PHP Code Sniffer](http://pear.php.net/package/PHP_CodeSniffer).
+This package is not affiliated with or supported by any job boards and we are not responsible for any use or misuse of this software.
 
-- **Add tests!** - Your patch won't be accepted if it doesn't have tests.
+### License
 
-- **Document any change in behaviour** - Make sure the `README.md` and any other relevant documentation are kept up-to-date.
+This package uses the Apache 2.0 license. Please see the [License File](https://www.jobapis.com/license/) for more information.
 
-- **Consider our release cycle** - We try to follow [SemVer v2.0.0](http://semver.org/). Randomly breaking public APIs is not an option.
+### Copyright
 
-- **Create feature branches** - Don't ask us to pull from your master branch.
-
-- **One pull request per feature** - If you want to do more than one thing, send multiple pull requests.
-
-- **Send coherent history** - Make sure each individual commit in your pull request is meaningful. If you had to make multiple intermediate commits while developing, please squash them before submitting.
-
-## License
-
-This is open source software, so share away. For more detailed information, see the [license.md](license.md) file.
+Copyright 2016, [Karl L. Hughes](https://www.github.com/karllhughes).
